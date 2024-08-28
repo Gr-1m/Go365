@@ -125,11 +125,11 @@ func wait(wt int) {
 	time.Sleep(waitTime)
 }
 
-// funtion to randomize the list of proxy servers
+// function to randomize the list of proxy servers
 func randomProxy(proxies []string) string {
 	var proxyString string
 
-	// selet a random proxy server from the list provided
+	// select a random proxy server from the list provided
 	if len(proxies) > 0 {
 		proxyString = proxies[rand.Intn(len(proxies))]
 	}
@@ -160,7 +160,7 @@ func randomProxy(proxies []string) string {
 		proxyString = "bp"
 	}
 	// I have NO IDEA why this works. Literally need to sandwich the defer between the returns. plz send help...
-	return proxyString
+	// return proxyString
 	defer response.Body.Close()
 	return proxyString
 
@@ -603,14 +603,8 @@ func main() {
 			if opt.flagEndpoint == "rst" {
 				proxyInput := ""
 				if opt.flagProxyFile != "" {
-					proxyInput := "bp"
-					for {
+					for proxyInput := "bp"; proxyInput == "bp"; {
 						proxyInput = randomProxy(proxyList)
-						if proxyInput == "bp" {
-							proxyInput = randomProxy(proxyList)
-						} else {
-							break
-						}
 					}
 				}
 				result, col := doTheStuffRst(user, pass, proxyInput)
@@ -629,14 +623,8 @@ func main() {
 			} else if opt.flagEndpoint == "graph" {
 				proxyInput := ""
 				if opt.flagProxyFile != "" {
-					proxyInput := "bp"
-					for {
+					for proxyInput := "bp"; proxyInput == "bp"; {
 						proxyInput = randomProxy(proxyList)
-						if proxyInput == "bp" {
-							proxyInput = randomProxy(proxyList)
-						} else {
-							break
-						}
 					}
 				}
 				result, col := doTheStuffGraph(user, pass, proxyInput)
